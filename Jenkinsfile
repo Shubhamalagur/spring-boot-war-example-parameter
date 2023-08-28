@@ -16,7 +16,7 @@ pipeline {
          }
           stage('Sonarstage'){
                 parallel{
-                    "SonarstageA" {
+                    stage('SonarstageA') {
                         agent {
                           label {
                                 label "Captain_Roger"
@@ -26,7 +26,7 @@ pipeline {
                         echo "This is branch a"
                         }
                     }
-                    "SonarstageB" {
+                    stage('SonarstageB') {
                         agent {
                           label {
                                 label "Captain_Roger"
