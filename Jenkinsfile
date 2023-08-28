@@ -9,6 +9,11 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Shubhamalagur/spring-boot-war-example.git']])
             }
         }
+        stage('Sonar stage') {
+            steps {
+                echo "running sonar scan"
+                    }
+        }
         stage('build') {
             steps {
                 sh 'mvn clean install'
