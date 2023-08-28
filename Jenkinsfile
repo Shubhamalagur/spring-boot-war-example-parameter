@@ -14,16 +14,28 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Shubhamalagur/spring-boot-war-example.git']])
                              }
          }
-        stage('Sonar stage') {
-            agent {
-              label {
-                    label "Captain_Roger"
-                     }
+          parallel(
+                    "SonarstageA": {
+                        agent {
+                          label {
+                                label "Captain_Roger"
+                                 }
+                                }
+                        steps{
+                        echo "This is branch a"
+                        }
+                    },
+                    "SonarstageB": {
+                        agent {
+                          label {
+                                label "Captain_Roger"
+                                 }
+                                }
+                        steps{
+                        echo "This is branch b"
+                        }
                     }
-            steps {
-                echo "running sonar scan"
-                    }
-        }
+            )
         stage('build') {
             agent {
               label {
