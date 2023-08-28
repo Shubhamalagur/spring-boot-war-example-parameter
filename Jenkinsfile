@@ -25,7 +25,7 @@ pipeline {
                         steps{
                         echo "This is branch a"
                         }
-                    },
+                    }
                     "SonarstageB" {
                         agent {
                           label {
