@@ -29,7 +29,7 @@ pipeline {
                     stage('SonarstageB') {
                         agent {
                           label {
-                                label "Captain_Roger"
+                                label "Captain_Philip"
                                  }
                                 }
                         steps{
