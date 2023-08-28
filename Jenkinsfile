@@ -15,7 +15,7 @@ pipeline {
                              }
          }
           stage('Sonarstage'){
-                parallel(
+                parallel{
                     "SonarstageA": {
                         agent {
                           label {
@@ -36,7 +36,7 @@ pipeline {
                         echo "This is branch b"
                         }
                     }
-            )}
+                }}
         stage('build') {
             agent {
               label {
