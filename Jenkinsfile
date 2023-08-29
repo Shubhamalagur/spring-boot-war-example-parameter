@@ -56,7 +56,17 @@ pipeline {
             steps {
                deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://3.109.121.205:8081')], contextPath: '/logo', war: '**/*.war'
             }
-        }    
+        }
+	stage('Email'){
+		agent {
+		label {
+			label "Captain_Philip"
+			} 
+			}
+		steps {
+			mail bcc: '', body: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', cc: '', from: 'shubhamalagur2@gmail.com', replyTo: '', subject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
+
+Check console output at $BUILD_URL to view the results.",     to:'shubhamalagur@gmail.com'}   
     }
 }
 
