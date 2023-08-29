@@ -54,7 +54,7 @@ pipeline {
                      }
                     }
             steps {
-               deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://13.233.133.196:8081')], contextPath: '/logo', war: '**/*.war'
+               deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://3.109.121.205:8081')], contextPath: '/logo', war: '**/*.war'
             }
         }    
     }
