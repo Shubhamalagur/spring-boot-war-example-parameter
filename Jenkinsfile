@@ -64,7 +64,7 @@ pipeline {
 			} 
 			}
 		steps {
-			mail bcc: '', body: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:Check console output at $BUILD_URL to view the results.', to:'shubhamalagur@gmail.com'}   
+			mail bcc: '', body: '${PROJECT_NAME} - Build # ${BUILD_NUMBER} - ${BUILD_STATUS}!', subject: '${PROJECT_NAME} - Build # ${BUILD_NUMBER} - ${BUILD_STATUS}:Check console output at ${BUILD_URL} to view the results.', to:'shubhamalagur@gmail.com'}   
     }
 }
 }
