@@ -63,15 +63,13 @@ pipeline {
 			label "Captain_Philip"
 			} 
 			}
-			post {
-    always {
+	steps
+		{
         emailext (
             to: 'shubhamalagur@gmail.com',
             subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - build ${currentBuild.number}",
             body: '${FILE, path="$WORKSPACE/results/summary.txt"}'
         )
-    }
-		}   
     }
 }
 }
