@@ -67,5 +67,6 @@ pipeline {
 			mail bcc: '', body: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', cc: '', from: 'shubhamalagur2@gmail.com', replyTo: '', subject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:Check console output at $BUILD_URL to view the results.",     to:'shubhamalagur@gmail.com'}   
     }
 }
+}
 
 
