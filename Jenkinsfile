@@ -63,7 +63,6 @@ pipeline {
 			label "Captain_Philip"
 			} 
 			}
-		steps {
 			post {
     always {
         emailext (
@@ -72,7 +71,6 @@ pipeline {
             body: '${FILE, path="$WORKSPACE/results/summary.txt"}'
         )
     }
-}
 		}   
     }
 }
