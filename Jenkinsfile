@@ -64,7 +64,16 @@ pipeline {
 			} 
 			}
 		steps {
-			emailext body: '''${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}:Check console output at ${env.BUILD_URL} to view the results.''', subject: '${env.PROJECT_NAME} - Build # ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}!', to: 'shubhamalagur@gmail.com'}   
+			post {
+    always {
+        emailext (
+            to: 'shubhamalagur@gmail.com',
+            subject: "${currentBuild.currentResult}: ${env.JOB_NAME} - build ${currentBuild.number}",
+            body: '${FILE, path="$WORKSPACE/results/summary.txt"}'
+        )
+    }
+}
+		}   
     }
 }
 }
