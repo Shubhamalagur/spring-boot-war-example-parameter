@@ -1,8 +1,12 @@
 pipeline {
     agent any
+	
+	tools {
+        maven 'Maven'
+    }
     
     parameters {
-        string(name: 'BRANCH_NAME', defaultValue: 'feature', description: 'Enter the Git branch name')
+        string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'Enter the Git branch name')
     }
     
     stages {
@@ -12,7 +16,7 @@ pipeline {
                     echo "Checking out ${params.BRANCH_NAME} branch..."
                     checkout([$class: 'GitSCM', 
                               branches: [[name: "*/${params.BRANCH_NAME}"]],
-                              userRemoteConfigs: [[url: 'YOUR_GITHUB_REPO_URL']]])
+                              userRemoteConfigs: [[url: 'https://github.com/Shubhamalagur/spring-boot-war-example-parameter.git']]])
                 }
             }
         }
@@ -21,7 +25,7 @@ pipeline {
             steps {
                 script {
                     echo "Building ${params.BRANCH_NAME} branch..."
-                    // Add build actions specific to the branch
+                    sh 'mvn clean install'
                 }
             }
         }
@@ -31,18 +35,30 @@ pipeline {
                 script {
                     def targetTomcat = ''
                     
-                    if (params.BRANCH_NAME == 'feature') {
+                    if (params.BRANCH_NAME == 'master') {
                         targetTomcat = 'tomcat-1'
-                    } else if (params.BRANCH_NAME == 'develop') {
+                    } else if (params.BRANCH_NAME == 'Dev') {
                         targetTomcat = 'tomcat-2'
-                    } else if (params.BRANCH_NAME == 'master') {
-                        targetTomcat = 'prod'
+                    } else if (params.BRANCH_NAME == 'Test') {
+                        targetTomcat = 'tomcat-3'
                     }
                     
-                    if (targetTomcat) {
-                        echo "Deploying ${params.BRANCH_NAME} branch to ${targetTomcat}..."
-                        // Add deployment actions specific to the targetTomcat
-                    } else {
+                    if (targetTomcat == 'tomcat-1') 
+						{
+							echo "Deploying ${params.BRANCH_NAME} branch to ${targetTomcat}..."
+							 deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://3.110.27.133:8081')], contextPath: '/master', war: '**/*.war'
+						} 
+					else if
+						{
+							echo "Deploying ${params.BRANCH_NAME} branch to ${targetTomcat}..."	
+							deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://3.110.27.133:8081')], contextPath: '/Dev', war: '**/*.war'
+						}
+					else if
+						{
+							echo "Deploying ${params.BRANCH_NAME} branch to ${targetTomcat}..."	
+							deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://3.110.27.133:8081')], contextPath: '/Test', war: '**/*.war'
+						}	
+					else {
                         echo "Branch ${params.BRANCH_NAME} is not configured for deployment."
                     }
                 }
