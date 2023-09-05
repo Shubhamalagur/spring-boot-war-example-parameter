@@ -48,12 +48,12 @@ pipeline {
 							echo "Deploying ${params.BRANCH_NAME} branch to ${targetTomcat}..."
 							 deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://43.204.114.96:8081')], contextPath: '/master', war: '**/*.war'
 						} 
-					else if
+					else if (targetTomcat = 'tomcat-2')
 						{
 							echo "Deploying ${params.BRANCH_NAME} branch to ${targetTomcat}..."	
 							deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://43.204.114.96:8081')], contextPath: '/Dev', war: '**/*.war'
 						}
-					else if
+					else if (targetTomcat = 'tomcat-3')
 						{
 							echo "Deploying ${params.BRANCH_NAME} branch to ${targetTomcat}..."	
 							deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://43.204.114.96:8081')], contextPath: '/Test', war: '**/*.war'
