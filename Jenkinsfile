@@ -46,17 +46,17 @@ pipeline {
                     if (targetTomcat == 'tomcat-1') 
 						{
 							echo "Deploying ${params.BRANCH_NAME} branch to ${targetTomcat}..."
-							 deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://3.110.27.133:8081')], contextPath: '/master', war: '**/*.war'
+							 deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://43.204.114.96:8081')], contextPath: '/master', war: '**/*.war'
 						} 
 					else if
 						{
 							echo "Deploying ${params.BRANCH_NAME} branch to ${targetTomcat}..."	
-							deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://3.110.27.133:8081')], contextPath: '/Dev', war: '**/*.war'
+							deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://43.204.114.96:8081')], contextPath: '/Dev', war: '**/*.war'
 						}
 					else if
 						{
 							echo "Deploying ${params.BRANCH_NAME} branch to ${targetTomcat}..."	
-							deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://3.110.27.133:8081')], contextPath: '/Test', war: '**/*.war'
+							deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://43.204.114.96:8081')], contextPath: '/Test', war: '**/*.war'
 						}	
 					else {
                         echo "Branch ${params.BRANCH_NAME} is not configured for deployment."
